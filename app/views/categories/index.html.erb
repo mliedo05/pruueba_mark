@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p> 
+
+<h1>Categories</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody id="data">
+  <%= render("categories/data")%>    
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Category', new_category_path, remote: true %>
