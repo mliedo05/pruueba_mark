@@ -13,6 +13,7 @@ class TypesController < ApplicationController
   # GET /types/new
   def new
     @type = Type.new
+    @markers = Marker.all
   end
 
   # GET /types/1/edit

@@ -5,9 +5,26 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-10.times do
-    Category.create!(
-        name: 
-        status: 
+
+
+20.times do
+    Category.create(
+        name: Faker::DcComics.title,
+        status: [true,false].sample
+    )
+    Subcategory.create(
+        name: Faker::DcComics.hero, 
+        category_id:rand(1..10)  
+    )
+    Marker.create(
+        name: Faker::DcComics.villain ,
+        url:Faker::Internet.url,
+        subcategory_id:rand(1..10),
+     )
+    Type.create(
+        name: Faker::DcComics.name,
+        marker_id:rand(1..10),
     )
 end
+
+

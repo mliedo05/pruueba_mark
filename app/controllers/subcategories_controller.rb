@@ -4,6 +4,7 @@ class SubcategoriesController < ApplicationController
   # GET /subcategories or /subcategories.json
   def index
     @subcategories = Subcategory.all
+    @categories = Category.all
   end
 
   # GET /subcategories/1 or /subcategories/1.json
@@ -13,6 +14,7 @@ class SubcategoriesController < ApplicationController
   # GET /subcategories/new
   def new
     @subcategory = Subcategory.new
+    @categories = Category.all
   end
 
   # GET /subcategories/1/edit
@@ -22,7 +24,7 @@ class SubcategoriesController < ApplicationController
   # POST /subcategories or /subcategories.json
   def create
     @subcategory = Subcategory.new(subcategory_params)
-
+    @categories = Category.all
     respond_to do |format|
       if @subcategory.save
         format.html { redirect_to @subcategory, notice: "Subcategory was successfully created." }

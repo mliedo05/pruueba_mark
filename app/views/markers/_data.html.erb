@@ -1,0 +1,10 @@
+<% @markers.each do |marker| %>
+      <tr>
+        <td><%= marker.name %></td>
+        <td><%= marker.url %></td>
+        <td><%= marker.subcategory %></td>
+        <td><%= link_to 'Show', marker %></td>
+        <td><%= link_to 'Edit', edit_marker_path(marker), remote: true %></td>
+        <td><%= link_to 'Destroy', marker, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %></td>
+      </tr>
+<% end %>

@@ -1,6 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+
 <h1>Subcategories</h1>
+<div id="createSubcategory">
+</div>
 
 <table>
   <thead>
@@ -13,13 +16,13 @@
 
   <tbody>
     <% @subcategories.each do |subcategory| %>
-      <tr>
+    <tr>
         <td><%= subcategory.name %></td>
-        <td><%= subcategory.category %></td>
+        <td><%= subcategory.category.name %></td>
         <td><%= link_to 'Show', subcategory %></td>
         <td><%= link_to 'Edit', edit_subcategory_path(subcategory) %></td>
-        <td><%= link_to 'Destroy', subcategory, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <td><%= link_to 'Destroy', subcategory, method: :delete, data: { confirm: 'Are you sure?' }  %></td>
+    </tr>
     <% end %>
   </tbody>
 </table>

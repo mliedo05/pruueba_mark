@@ -4,6 +4,9 @@ class MarkersController < ApplicationController
   # GET /markers or /markers.json
   def index
     @markers = Marker.all
+    @subcategories = Subcategory.all
+
+    @marker_type = Type.group(:marker_id).count.transform_keys {|key| Marker.find(key).name}
   end
 
   # GET /markers/1 or /markers/1.json
@@ -13,20 +16,22 @@ class MarkersController < ApplicationController
   # GET /markers/new
   def new
     @marker = Marker.new
+    @subcategories = Subcategory.all
   end
 
   # GET /markers/1/edit
   def edit
+    @subcategories = Subcategory.all
   end
 
   # POST /markers or /markers.json
   def create
+    @subcategories = Subcategory.all
     @marker = Marker.new(marker_params)
-
+    @markers = Marker.all
     respond_to do |format|
       if @marker.save
-        format.html { redirect_to @marker, notice: "Marker was successfully created." }
-        format.json { render :show, status: :created, location: @marker }
+        format.js { render nothing: true}
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @marker.errors, status: :unprocessable_entity }
@@ -36,10 +41,12 @@ class MarkersController < ApplicationController
 
   # PATCH/PUT /markers/1 or /markers/1.json
   def update
+    @subcategories = Subcategory.all
+    @markers = Marker.all
     respond_to do |format|
       if @marker.update(marker_params)
+        format.js { render nothing: true }
         format.html { redirect_to @marker, notice: "Marker was successfully updated." }
-        format.json { render :show, status: :ok, location: @marker }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @marker.errors, status: :unprocessable_entity }
@@ -49,10 +56,12 @@ class MarkersController < ApplicationController
 
   # DELETE /markers/1 or /markers/1.json
   def destroy
-    @marker.destroy
-    respond_to do |format|
-      format.html { redirect_to markers_url, notice: "Marker was successfully destroyed." }
-      format.json { head :no_content }
+   if @marker.destroy
+      @markers = Marker.all
+      respond_to do |format|
+        format.js { render nothing: true }
+        format.html { redirect_to markers_url, notice: "Marker was successfully destroyed." }
+      end
     end
   end
 

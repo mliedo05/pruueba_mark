@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Markers</h1>
+<div id="createMarker">
+</div>
 
 <table>
   <thead>
@@ -12,20 +14,13 @@
     </tr>
   </thead>
 
-  <tbody>
-    <% @markers.each do |marker| %>
-      <tr>
-        <td><%= marker.name %></td>
-        <td><%= marker.url %></td>
-        <td><%= marker.subcategory %></td>
-        <td><%= link_to 'Show', marker %></td>
-        <td><%= link_to 'Edit', edit_marker_path(marker) %></td>
-        <td><%= link_to 'Destroy', marker, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+  <tbody id="data">
+    <%= render("markers/data")%> 
   </tbody>
 </table>
-
+<div>
+  <%= pie_chart @marker_type %>
+</div>
 <br>
 
-<%= link_to 'New Marker', new_marker_path %>
+<%= link_to 'New Marker', new_marker_path, remote: true %>
