@@ -10,7 +10,7 @@
 20.times do
     Category.create(
         name: Faker::DcComics.title,
-        status: [true,false].sample
+        public: [true,false].sample
     )
     Subcategory.create(
         name: Faker::DcComics.hero, 
